@@ -6,6 +6,7 @@ export const createTodo = createAsyncThunk('todos/create', async ({ token, todo 
     try {
         const config = { headers: { Authorization: `Bearer ${token}` } };
         const res = await axiosInstance.post('/api/todos', todo, config);
+        if (res.data) return res.data;
     } catch (Error) {
         console.log(Error)
     }
@@ -57,6 +58,7 @@ const todosSlice = createSlice({
     },
     extraReducers: builder => {
         builder
+            .addCase(createTodo.fulfilled, (state, action) => { state.todos = [...state.todos, action.payload].sort((a, b) => a.position - b.position) })
             .addCase(getTodos.fulfilled, (state, action) => { state.todos = action.payload.sort((a, b) => a.position - b.position) })
             .addCase(reorderTodo.fulfilled, (state, action) => {
                 const { activeIndex, overIndex } = action.payload;
