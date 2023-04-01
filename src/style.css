@@ -17,6 +17,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+
+    background-color: #e2e6e6;
 }
 
 .ant-divider {
