@@ -74,7 +74,8 @@ const Home = () => {
             return;
         };
 
-        dispatch(createTodo({ token: user.token, todo }))
+        dispatch(createTodo({ token: user.token, todo }));
+        setOpen(false);
     };
 
     const handleDragEnd = (event) => {
