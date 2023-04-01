@@ -15,8 +15,7 @@ const Login = () => {
     const handleSubmit = async ({ email }) => {
         try {
             const res = await axiosInstance.post('/api/users', { email });
-            if (res.data) localStorage.setItem('user', JSON.stringify(res.data));
-            return navigate('/');
+            return navigate('/login');
         }
         catch (Error) {
             const message = (Error.response.data);
